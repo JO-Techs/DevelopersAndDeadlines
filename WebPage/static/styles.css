@@ -1,0 +1,589 @@
+/* 
+ * Styles for "Why Developers Work on Deadline" webpage
+ * Theme: Orchid Purple
+ * 
+ * This stylesheet defines the visual appearance of our humorous webpage
+ * about why developers are more productive when working on deadline.
+ */
+
+/* Base Styles - Color variables for consistent theming */
+:root {
+    --primary-color: #9370DB; /* Medium Purple */
+    --secondary-color: #BA55D3; /* Medium Orchid */
+    --accent-color: #DA70D6; /* Orchid */
+    --dark-color: #4B0082; /* Indigo */
+    --light-color: #F8F4FF; /* Very Light Lavender */
+    --success-color: #8FBC8F; /* Dark Sea Green */
+    --text-color: #333;
+    --timeline-color: #E6E6FA; /* Lavender */
+}
+
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base body styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-color);
+    overflow-x: hidden;
+    animation: fadeIn 1s ease-in; /* Fade in animation when page loads */
+}
+
+/* Page load animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative pattern overlay for header */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.05) 10px,
+        rgba(255, 255, 255, 0) 10px,
+        rgba(255, 255, 255, 0) 20px
+    );
+}
+
+/* Main title styling */
+.title {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1; /* Ensure text appears above the pattern */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: slideInDown 1s ease-out;
+}
+
+/* Subtitle styling */
+.subtitle {
+    font-size: 1.2rem;
+    font-style: italic;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+    animation: slideInUp 1s ease-out;
+}
+
+/* Title entrance animation */
+@keyframes slideInDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Subtitle entrance animation */
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Main Content Container */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Section styling - each major content block */
+section {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(147, 112, 219, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for sections */
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(147, 112, 219, 0.3);
+}
+
+/* Section headings */
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 2rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+/* Decorative underline for section headings */
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+/* Subheadings */
+h3 {
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+}
+
+/* Loading indicator for API data */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--primary-color);
+    font-style: italic;
+}
+
+/* Intro Section - First content area */
+.intro {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+/* Coffee cup container */
+.coffee-container {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Coffee cup styling */
+.coffee-cup {
+    width: 100px;
+    height: 80px;
+    background-color: #fff;
+    border: 5px solid var(--dark-color);
+    border-radius: 0 0 15px 15px;
+    position: relative;
+    margin: 20px auto;
+}
+
+/* Coffee cup handle */
+.coffee-cup::after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 15px;
+    width: 20px;
+    height: 30px;
+    border: 5px solid var(--dark-color);
+    border-radius: 0 10px 20px 0;
+}
+
+/* Coffee liquid */
+.coffee {
+    width: 100%;
+    height: 50px;
+    background-color: var(--secondary-color);
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 10px 10px;
+}
+
+/* Steam effect */
+.steam {
+    position: absolute;
+    width: 8px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    top: -35px;
+    left: 15px;
+    animation: steam 2s infinite;
+}
+
+/* Additional steam elements with offset animations */
+.steam2 {
+    left: 35px;
+    animation-delay: 0.3s;
+}
+
+.steam3 {
+    left: 55px;
+    animation-delay: 0.6s;
+}
+
+/* Steam animation */
+@keyframes steam {
+    0% {
+        transform: translateY(0) scaleX(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateY(-15px) scaleX(1.5);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-30px) scaleX(1);
+        opacity: 0;
+    }
+}
+
+/* Intro text styling */
+.intro-text {
+    flex: 2;
+    min-width: 300px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+/* Timeline Section - Shows the developer's journey */
+.timeline {
+    position: relative;
+    padding: 2rem;
+}
+
+/* Vertical timeline line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50px;
+    height: 100%;
+    width: 4px;
+    background: var(--timeline-color);
+}
+
+/* Individual timeline items */
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 100px;
+}
+
+/* Timeline item icon */
+.timeline-icon {
+    position: absolute;
+    left: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    z-index: 1;
+}
+
+/* Timeline content card */
+.timeline-content {
+    background-color: #F8F4FF;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(147, 112, 219, 0.15);
+    position: relative;
+}
+
+/* Timeline content pointer */
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 20px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #F8F4FF;
+}
+
+/* Progress bar container */
+.progress-container {
+    margin: 1rem 0;
+    background-color: #E6E6FA;
+    border-radius: 4px;
+    height: 20px;
+    overflow: hidden;
+}
+
+/* Progress bar */
+.progress-bar {
+    height: 100%;
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    font-size: 0.8rem;
+    transition: width 1.5s ease;
+}
+
+/* Animated progress bar */
+.progress-bar-animated {
+    animation: progressAnimation 2s ease-in-out;
+}
+
+/* Progress bar animation */
+@keyframes progressAnimation {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* Developer thought bubble */
+.dev-thought {
+    background-color: #F0E6FF;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-top: 1rem;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* Thought bubble icon */
+.dev-thought i {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    margin-top: 3px;
+}
+
+/* Thought bubble text */
+.dev-thought p {
+    font-style: italic;
+    margin: 0;
+}
+
+/* Science Section - Explains the deadline phenomenon */
+.science {
+    background-color: #F8F4FF;
+}
+
+/* Individual science fact item */
+.science-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    gap: 1.5rem;
+}
+
+/* Icon container for science facts */
+.icon-container {
+    width: 60px;
+    height: 60px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+/* Science fact content */
+.science-content {
+    flex: 1;
+}
+
+/* Science fact paragraphs */
+.science-content p {
+    margin-bottom: 0.5rem;
+}
+
+/* Survival Kit Section - Tools developers need */
+.survival-kit {
+    text-align: center;
+}
+
+/* Container for kit items */
+.kit-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Individual kit item */
+.kit-item {
+    width: 150px;
+    height: 150px;
+    background-color: var(--light-color);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Kit item hover effect */
+.kit-item:hover {
+    transform: scale(1.05);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Kit item icon */
+.kit-item i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
+/* Kit item icon hover effect */
+.kit-item:hover i {
+    color: white;
+}
+
+/* Quotes Section - Wisdom about deadlines */
+.quotes {
+    background-color: var(--dark-color);
+    color: white;
+}
+
+/* Container for quotes */
+.quote-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Individual quote styling */
+blockquote {
+    font-size: 1.2rem;
+    font-style: italic;
+    position: relative;
+    padding-left: 2rem;
+}
+
+/* Decorative quote mark */
+blockquote::before {
+    content: '"';
+    font-size: 4rem;
+    position: absolute;
+    left: -10px;
+    top: -20px;
+    color: var(--accent-color);
+    opacity: 0.5;
+}
+
+/* Quote attribution */
+cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    text-align: right;
+    color: var(--accent-color);
+}
+
+/* Meta Deadline Section - About this page being created on deadline */
+.meta-deadline {
+    background-color: #F0E6FF;
+    border: 2px dashed var(--accent-color);
+}
+
+/* Meta content container */
+.meta-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Meta text container */
+.meta-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Meta text styling */
+.meta-text p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+/* Small text in footer */
+.small-text {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Adjust title size on smaller screens */
+    .title {
+        font-size: 2rem;
+    }
+    
+    /* Adjust timeline positioning on smaller screens */
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        padding-left: 70px;
+    }
+    
+    .timeline-icon {
+        left: 10px;
+    }
+    
+    /* Stack science items vertically on smaller screens */
+    .science-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    /* Make kit items smaller on mobile */
+    .kit-item {
+        width: 120px;
+        height: 120px;
+    }
+}

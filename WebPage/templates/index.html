@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Developers Work on Deadline</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1 class="title">Why Developers Work on Deadline</h1>
+        <p class="subtitle">A scientific investigation into the mysterious productivity phenomenon</p>
+    </header>
+
+    <main>
+        <section class="intro">
+            <div class="coffee-container">
+                <div class="coffee-cup">
+                    <div class="coffee"></div>
+                    <div class="steam"></div>
+                    <div class="steam steam2"></div>
+                    <div class="steam steam3"></div>
+                </div>
+            </div>
+            <p class="intro-text">
+                Ever wondered why developers seem to accomplish in 24 hours what they couldn't do in 2 weeks? 
+                Let's explore the fascinating science behind deadline-driven development!
+            </p>
+        </section>
+
+        <section class="timeline">
+            <h2>The Developer Deadline Cycle</h2>
+            <div id="timeline-container">
+                <!-- Timeline items will be loaded from API -->
+                <div class="loading">Loading timeline data...</div>
+            </div>
+        </section>
+
+        <section class="science">
+            <h2>The Science Behind Deadline Magic</h2>
+            <div id="science-container">
+                <!-- Science facts will be loaded from API -->
+                <div class="loading">Loading science data...</div>
+            </div>
+        </section>
+
+        <section class="survival-kit">
+            <h2>The Developer Deadline Survival Kit</h2>
+            <div id="kit-container" class="kit-items">
+                <!-- Kit items will be loaded from API -->
+                <div class="loading">Loading survival kit data...</div>
+            </div>
+        </section>
+
+        <section class="quotes">
+            <h2>Words of Wisdom</h2>
+            <div id="quotes-container" class="quote-container">
+                <!-- Quotes will be loaded from API -->
+                <div class="loading">Loading quotes...</div>
+            </div>
+        </section>
+        
+        <!-- Meta section about this page being created on a deadline -->
+        <section class="meta-deadline">
+            <h2>Meta Deadline Magic</h2>
+            <div class="meta-content">
+                <div class="icon-container">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <div class="meta-text">
+                    <p><strong>Fun Fact:</strong> This webpage about developer deadlines was itself created with only 20 minutes left on the deadline!</p>
+                    <p>The creator experienced firsthand the mysterious productivity boost described on this very page. 
+                    What would normally take days was accomplished in minutes, proving once again that the deadline 
+                    phenomenon is real and powerful.</p>
+                    <div class="progress-container">
+                        <div class="progress-bar progress-bar-animated" style="width: 100%;">100% Deadline Power</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by a developer who was DEFINITELY working on a deadline</p>
+        <p class="small-text">No developers were harmed in the making of this webpage. Coffee supplies, however, were severely depleted.</p>
+    </footer>
+
+    <!-- JavaScript to load data from our API and handle animations -->
+    <script>
+        // Wait for DOM to be fully loaded before executing code
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch data from our API endpoint
+            fetch('/api/deadline-data/')
+                .then(response => {
+                    // Check if response is ok (status in the range 200-299)
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Successfully fetched data, now populate the page sections
+                    
+                    // Populate timeline section
+                    populateTimeline(data.timeline_stages);
+                    
+                    // Populate science facts section
+                    populateScienceFacts(data.science_facts);
+                    
+                    // Populate survival kit section
+                    populateSurvivalKit(data.survival_kit);
+                    
+                    // Populate quotes section
+                    populateQuotes(data.quotes);
+                    
+                    // Set up animation observers after content is loaded
+                    setupAnimationObservers();
+                })
+                .catch(error => {
+                    // Handle any errors that occurred during fetch
+                    console.error('Error fetching data:', error);
+                    document.querySelectorAll('.loading').forEach(el => {
+                        el.textContent = 'Error loading data. Please refresh the page.';
+                    });
+                });
+        });
+        
+        /**
+         * Populates the timeline section with stages data
+         * @param {Array} stages - Array of timeline stage objects
+         */
+        function populateTimeline(stages) {
+            const timelineContainer = document.getElementById('timeline-container');
+            timelineContainer.innerHTML = '';
+            
+            stages.forEach(stage => {
+                // Create timeline item element
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                
+                // Determine appropriate icon based on the day
+                let icon = 'calendar-alt';
+                if (stage.day === 14) icon = 'clock';
+                else if (stage.day === 7) icon = 'mug-hot';
+                else if (stage.day === 10) icon = 'laptop-code';
+                else if (stage.day === 13) icon = 'exclamation-triangle';
+                
+                // Build the HTML for this timeline item
+                timelineItem.innerHTML = `
+                    <div class="timeline-icon">
+                        <i class="fas fa-${icon}"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Day ${stage.day}: "${stage.title}"</h3>
+                        <p>${stage.description}</p>
+                        <div class="progress-container">
+                            <div class="progress-bar ${stage.day === 14 ? 'progress-bar-animated' : ''}" style="width: ${stage.progress}%;">${stage.progress}%</div>
+                        </div>
+                        <div class="dev-thought">
+                            <i class="fas fa-comment"></i>
+                            <p>"${stage.thought}"</p>
+                        </div>
+                    </div>
+                `;
+                timelineContainer.appendChild(timelineItem);
+            });
+        }
+        
+        /**
+         * Populates the science facts section
+         * @param {Array} facts - Array of science fact objects
+         */
+        function populateScienceFacts(facts) {
+            const scienceContainer = document.getElementById('science-container');
+            scienceContainer.innerHTML = '';
+            
+            facts.forEach((fact, index) => {
+                // Create science item element
+                const scienceItem = document.createElement('div');
+                scienceItem.className = 'science-item';
+                
+                // Determine appropriate icon based on the index
+                let icon = 'brain';
+                if (index === 1) icon = 'bolt';
+                else if (index === 2) icon = 'ban';
+                
+                // Build the HTML for this science fact
+                scienceItem.innerHTML = `
+                    <div class="icon-container">
+                        <i class="fas fa-${icon}"></i>
+                    </div>
+                    <div class="science-content">
+                        <h3>${fact.title}</h3>
+                        <p>${fact.description}</p>
+                        ${fact.explanation ? `<p>${fact.explanation}</p>` : ''}
+                    </div>
+                `;
+                scienceContainer.appendChild(scienceItem);
+            });
+        }
+        
+        /**
+         * Populates the survival kit section
+         * @param {Array} items - Array of survival kit item objects
+         */
+        function populateSurvivalKit(items) {
+            const kitContainer = document.getElementById('kit-container');
+            kitContainer.innerHTML = '';
+            
+            items.forEach(item => {
+                // Create kit item element
+                const kitItem = document.createElement('div');
+                kitItem.className = 'kit-item';
+                kitItem.innerHTML = `
+                    <i class="fas fa-${item.icon}"></i>
+                    <p>${item.description}</p>
+                `;
+                kitContainer.appendChild(kitItem);
+            });
+        }
+        
+        /**
+         * Populates the quotes section
+         * @param {Array} quotes - Array of quote objects
+         */
+        function populateQuotes(quotes) {
+            const quotesContainer = document.getElementById('quotes-container');
+            quotesContainer.innerHTML = '';
+            
+            quotes.forEach(quote => {
+                // Create quote element
+                const quoteItem = document.createElement('blockquote');
+                quoteItem.innerHTML = `
+                    ${quote.text}
+                    <cite>- ${quote.author}</cite>
+                `;
+                quotesContainer.appendChild(quoteItem);
+            });
+        }
+        
+        /**
+         * Sets up intersection observers for animating elements when they come into view
+         */
+        function setupAnimationObservers() {
+            // Create an intersection observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // If element is visible, find progress bars that aren't animated yet
+                        const progressBar = entry.target.querySelector('.progress-bar:not(.progress-bar-animated)');
+                        if (progressBar) {
+                            progressBar.classList.add('progress-bar-animated');
+                        }
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when element is 50% visible
+
+            // Observe all timeline content elements
+            document.querySelectorAll('.timeline-content').forEach(item => {
+                observer.observe(item);
+            });
+        }
+    </script>
+</body>
+</html>
