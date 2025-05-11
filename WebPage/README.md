@@ -42,14 +42,4 @@ This project is a Django-based web application with a REST API backend and a dyn
 - `templates/`: HTML templates
 - `static/`: CSS and static assets
 
-## Meta Deadline Magic
-
-This project itself was created with only 20 minutes left on the deadline, proving the very phenomenon it describes! The creator experienced firsthand the mysterious productivity boost that happens when a deadline looms.
-
-## License
-
-This project is open source and available for anyone who needs a good laugh about developer productivity.
-
----
-
 *Created by a developer who was DEFINITELY working on a deadline*
